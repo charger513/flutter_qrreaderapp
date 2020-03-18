@@ -38,18 +38,19 @@ class _HomePageState extends State<HomePage> {
   _scanQR() async {
     // https://google.com.mx
     // geo:22.300371942409488,-98.32967176875003
+
     String futureString = '';
-    try {
-      futureString = await BarcodeScanner.scan();
-    } catch (e) {
-      futureString = e.toString();
-    }
+    // try {
+    //   futureString = await BarcodeScanner.scan();
+    // } catch (e) {
+    //   futureString = e.toString();
+    // }
 
-    print('Future string: $futureString');
+    // print('Future string: $futureString');
 
-    if(futureString != null) {
-      print('Tenemos información');
-    }
+    // if(futureString != null) {
+    //   print('Tenemos información');
+    // }
   }
 
   Widget _callPage(int paginaActual) {
