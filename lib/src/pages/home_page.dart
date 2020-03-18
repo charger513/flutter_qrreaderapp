@@ -1,3 +1,4 @@
+import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_qrreaderapp/src/pages/direcciones_page.dart';
 import 'package:flutter_qrreaderapp/src/pages/mapas_page.dart';
@@ -28,10 +29,27 @@ class _HomePageState extends State<HomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.filter_center_focus),
-        onPressed: () {},
+        onPressed: _scanQR,
         backgroundColor: Theme.of(context).primaryColor,
       ),
     );
+  }
+
+  _scanQR() async {
+    // https://google.com.mx
+    // geo:22.300371942409488,-98.32967176875003
+    String futureString = '';
+    try {
+      futureString = await BarcodeScanner.scan();
+    } catch (e) {
+      futureString = e.toString();
+    }
+
+    print('Future string: $futureString');
+
+    if(futureString != null) {
+      print('Tenemos información');
+    }
   }
 
   Widget _callPage(int paginaActual) {
