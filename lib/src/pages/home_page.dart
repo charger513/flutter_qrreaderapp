@@ -2,6 +2,7 @@ import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_qrreaderapp/src/pages/direcciones_page.dart';
 import 'package:flutter_qrreaderapp/src/pages/mapas_page.dart';
+import 'package:flutter_qrreaderapp/src/providers/db_provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -39,18 +40,17 @@ class _HomePageState extends State<HomePage> {
     // https://google.com.mx
     // geo:22.300371942409488,-98.32967176875003
 
-    String futureString = '';
+    String futureString = 'https://google.com.mx';
     // try {
     //   futureString = await BarcodeScanner.scan();
     // } catch (e) {
     //   futureString = e.toString();
     // }
 
-    // print('Future string: $futureString');
-
-    // if(futureString != null) {
-    //   print('Tenemos información');
-    // }
+    if(futureString != null) {
+      final scan = ScanModel(valor: futureString);
+      DBProvider.db.nuevoScan(scan);
+    }
   }
 
   Widget _callPage(int paginaActual) {
