@@ -41,7 +41,7 @@ class MapaPage extends StatelessWidget {
       '{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}',
       additionalOptions: {
         'accessToken': 'pk.eyJ1IjoiY2hhcmdlcjUxMyIsImEiOiJjazd5MXk1YzQwMnBiM2xxbGRoY3V2MXRhIn0.P8FmU9KcY1D_-sMyT8f6kw',
-        'id': 'mapbox.streets'
+        'id': 'mapbox.streets' // streets, dark, light, outdoors, satellite
       }
     );
   }
