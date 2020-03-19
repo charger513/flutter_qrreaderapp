@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_qrreaderapp/src/bloc/scans_bloc.dart';
 import 'package:flutter_qrreaderapp/src/models/scan_model.dart';
 import 'package:flutter_qrreaderapp/src/pages/direcciones_page.dart';
 import 'package:flutter_qrreaderapp/src/pages/mapas_page.dart';
+import 'package:flutter_qrreaderapp/src/utils/utils.dart' as utils;
 
 class HomePage extends StatefulWidget {
   @override
@@ -42,7 +45,7 @@ class _HomePageState extends State<HomePage> {
     // https://google.com.mx
     // geo:22.300371942409488,-98.32967176875003
 
-    String futureString = 'https://google.com.mx';
+    String futureString = 'https://ciudadbyte.com';
     // try {
     //   futureString = await BarcodeScanner.scan();
     // } catch (e) {
@@ -52,6 +55,17 @@ class _HomePageState extends State<HomePage> {
     if(futureString != null) {
       final scan = ScanModel(valor: futureString);
       scansBloc.agregarScan(scan);
+
+      final scan2 = ScanModel(valor: 'geo:22.300371942409488,-98.32967176875003');
+      scansBloc.agregarScan(scan2);
+
+      if(Platform.isIOS) {
+        Future.delayed(Duration(milliseconds: 750), () {
+          utils.abrirScan(scan)
+        });
+      } else {
+        utils.abrirScan(scan);
+      }
     }
   }
 
