@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_qrreaderapp/src/models/scan_model.dart';
 
-class MapaPage extends StatelessWidget {
+class MapaPage extends StatefulWidget {
 
+  @override
+  _MapaPageState createState() => _MapaPageState();
+}
+
+class _MapaPageState extends State<MapaPage> {
   final map = new MapController();
+
+  String tipoMapa = 'streets';
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +25,35 @@ class MapaPage extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.my_location),
             onPressed: () {
-              map.move(scan.getLatLng(), 10);
+              map.move(scan.getLatLng(), 15);
             },
           )
         ],
       ),
-      body: _crearFlutterMap(scan)
+      body: _crearFlutterMap(scan),
+      floatingActionButton: _crearBotonFlotante(context),
+    );
+  }
+
+  Widget _crearBotonFlotante(BuildContext context) {
+    return FloatingActionButton(
+      child: Icon(Icons.repeat),
+      backgroundColor: Theme.of(context).primaryColor,
+      onPressed: () {
+        // streets, dark, light, outdoors, satellite
+        if(tipoMapa == 'streets') {
+          tipoMapa = 'dark';
+        } else if(tipoMapa == 'dark') {
+          tipoMapa = 'light';
+        } else if(tipoMapa == 'light') {
+          tipoMapa = 'outdoors';
+        }else if(tipoMapa == 'outdoors') {
+          tipoMapa = 'satellite';
+        } else {
+          tipoMapa = 'streets';
+        }
+        setState(() {});
+      },
     );
   }
 
@@ -47,7 +77,7 @@ class MapaPage extends StatelessWidget {
       '{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}',
       additionalOptions: {
         'accessToken': 'pk.eyJ1IjoiY2hhcmdlcjUxMyIsImEiOiJjazd5MXk1YzQwMnBiM2xxbGRoY3V2MXRhIn0.P8FmU9KcY1D_-sMyT8f6kw',
-        'id': 'mapbox.streets' // streets, dark, light, outdoors, satellite
+        'id': 'mapbox.$tipoMapa' // streets, dark, light, outdoors, satellite
       }
     );
   }

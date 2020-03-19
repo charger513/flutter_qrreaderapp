@@ -44,6 +44,7 @@ class _HomePageState extends State<HomePage> {
   _scanQR(BuildContext context) async {
     // https://google.com.mx
     // geo:22.300371942409488,-98.32967176875003
+    // geo:40.713174051070794,-74.01358023127445
 
     String futureString = 'https://ciudadbyte.com';
     // try {
@@ -56,7 +57,7 @@ class _HomePageState extends State<HomePage> {
       final scan = ScanModel(valor: futureString);
       scansBloc.agregarScan(scan);
 
-      final scan2 = ScanModel(valor: 'geo:22.300371942409488,-98.32967176875003');
+      final scan2 = ScanModel(valor: 'geo:40.713174051070794,-74.01358023127445');
       scansBloc.agregarScan(scan2);
 
       if(Platform.isIOS) {
